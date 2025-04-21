@@ -1,0 +1,145 @@
+/* Base styles */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+@tailwind utilities;
+
+:root {
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: #333;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+}
+
+/* Custom utility classes */
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Transitions */
+.transition-all {
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Form elements */
+input, textarea, select {
+  @apply border border-gray-300 rounded-md;
+  @apply focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent;
+}
+
+/* Button styles */
+button {
+  @apply font-medium transition-colors duration-300;
+}
+
+/* Navigation styles */
+.nav-link {
+  @apply text-white hover:text-teal-200 transition-colors duration-300;
+}
+
+.nav-link.active {
+  @apply text-teal-300 font-medium;
+}
+
+/* Card hover effects */
+.card-hover {
+  @apply transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0d9488;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0f766e;
+}
+
+/* Table styles */
+table {
+  @apply w-full border-collapse;
+}
+
+th, td {
+  @apply p-3 border-b border-gray-200;
+}
+
+/* Hero section text shadow */
+.hero-text {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Image hover effects */
+.img-hover {
+  @apply transition-all duration-300;
+}
+
+.img-hover:hover {
+  @apply brightness-110;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  h1 {
+    @apply text-3xl;
+  }
+  
+  h2 {
+    @apply text-2xl;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none;
+  }
+  
+  body {
+    font-size: 12pt;
+  }
+}
+
+/* Accessibility focus styles */
+*:focus-visible {
+  @apply outline-2 outline-offset-2 outline-teal-500;
+}
+
+/* Dark mode styles (if needed) */
+@media (prefers-color-scheme: dark) {
+  .dark-mode-support {
+    @apply bg-gray-900 text-white;
+  }
+}
