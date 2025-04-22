@@ -44,9 +44,71 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <div className="flex-shrink-0">
             <Link to="/" className="flex items-center">
-              <span className={`font-serif text-2xl font-bold ${isScrolled ? 'text-teal-800' : 'text-white'}`}>
-                Paradise Resort
-              </span>
+            <div className="h-10">
+  <svg 
+    viewBox="0 0 320 60" 
+    className="h-full" 
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    {/* Glowing background */}
+    <rect 
+      x="5" 
+      y="5" 
+      width="310" 
+      height="50" 
+      rx="25" 
+      fill={isScrolled ? "#0D0D2B" : "transparent"} 
+      stroke={isScrolled ? "#00FFFF" : "#FF00FF"}
+      strokeWidth="2"
+      className={`${isScrolled ? '' : 'opacity-70'}`}
+    />
+    
+    {/* Mountain silhouette */}
+    <path 
+      d="M30 45L45 25L55 35L70 15L85 35L100 25L115 45H30z" 
+      fill={isScrolled ? "#00FFFF" : "#39FF14"}
+      className="opacity-90"
+    />
+    
+    {/* Palm tree */}
+    <path 
+      d="M75 45c0 0-3-12 0-16 3-4 8-2 8-2s-2-6 1-10c3-4 6-2 6-2s-3 6 0 10c3 4 5 2 5 2s-5 4-5 8c0 4 2 10 2 10h-17z" 
+      fill={isScrolled ? "#FF00FF" : "#FF10F0"}
+      className="opacity-80"
+    />
+    
+    {/* Sun */}
+    <circle 
+      cx="95" 
+      cy="15" 
+      r="6" 
+      fill={isScrolled ? "#FFFF00" : "#FFF200"}
+      className="opacity-90"
+    />
+    
+    {/* Text with neon glow effect */}
+    <text 
+      x="130" 
+      y="38" 
+      fontFamily="serif" 
+      fontSize="22" 
+      fontWeight="bold" 
+      fill={isScrolled ? "#FFFFFF" : "#FFFFFF"}
+      stroke={isScrolled ? "#FF00FF" : "#00FFFF"}
+      strokeWidth="1"
+    >
+      Hill Paradise Resort
+    </text>
+    
+    {/* Decorative line */}
+    <path 
+      d="M130 42h160" 
+      stroke={isScrolled ? "#00FFFF" : "#FF00FF"} 
+      strokeWidth="2"
+      strokeDasharray="1 3"
+    />
+  </svg>
+</div>
             </Link>
           </div>
           

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Hero = () => (
   <div className="relative h-screen overflow-hidden">
-    {/* Background Video with Fallback */}
+    {/* Background Video Only */}
     <div className="absolute inset-0 z-0">
       <video
         autoPlay
@@ -12,51 +12,46 @@ const Hero = () => (
         playsInline
         className="w-full h-full object-cover transform scale-110 animate-zoom-in-out"
       >
-        <source src="/videos/resort-hero.mp4" type="video/mp4" />
+        <source src="\src\assets\images\WhatsApp Video 2025-03-11 at 11.43.54 AM.mp4" type="video/mp4" />
         <img 
           src="/images/resort-hero-fallback.jpg" 
           alt="Luxury resort backdrop" 
           className="w-full h-full object-cover"
         />
       </video>
-      <div className="absolute inset-0 bg-gradient-to-r from-teal-900/90 via-teal-800/70 to-black/50"></div>
     </div>
-    
-    {/* Animated gradient overlay */}
-    <div className="absolute inset-0 bg-gradient-to-r from-teal-900/90 via-teal-800/70 to-black/50 z-10 animate-gradient-shift" />
-    
-    {/* Hero content with enhanced typography */}
-    <div className="relative z-20 h-full flex items-center">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="max-w-3xl transform transition-all duration-1000 ease-out animate-fade-in-up">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-tight tracking-tighter">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-white animate-text-glow">
-              Experience Luxury
-            </span><br />
-            <span className="text-white drop-shadow-lg">in Paradise</span>
-          </h1>
-          <p className="text-xl lg:text-2xl text-gray-100 mb-8 font-light leading-relaxed max-w-2xl">
-            Escape to our exclusive resort where luxury meets natural beauty. Indulge in world-class amenities, breathtaking views, and unforgettable experiences.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link 
-              to="/rooms" 
-              className="relative overflow-hidden bg-teal-600 hover:bg-teal-700 text-white py-4 px-8 rounded-lg text-lg font-medium transition-all duration-500 text-center transform hover:scale-105 shadow-xl hover:shadow-teal-500/30 group"
-            >
-              <span className="relative z-10">Explore Rooms</span>
-              <span className="absolute inset-0 bg-gradient-to-r from-teal-500 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-            </Link>
-            <Link 
-              to="/activities" 
-              className="relative overflow-hidden bg-transparent hover:bg-white/10 text-white border-2 border-white py-4 px-8 rounded-lg text-lg font-medium transition-all duration-500 text-center transform hover:scale-105 hover:shadow-lg group"
-            >
-              <span className="relative z-10">View Activities</span>
-              <span className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
-            </Link>
-          </div>
-        </div>
+   {/* Hero content with enhanced typography - positioned higher */}
+<div className="relative z-20 h-full flex items-start pt-20 md:pt-32"> {/* Changed from items-center to items-start and added padding-top */}
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+    <div className="max-w-3xl transform transition-all duration-1000 ease-out animate-fade-in-up">
+      <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-white mb-6 leading-tight tracking-tighter">
+        <span className="bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-white animate-text-glow">
+          Experience Luxury
+        </span><br />
+        <span className="text-white drop-shadow-lg">in Paradise</span>
+      </h1>
+      <p className="text-xl lg:text-2xl text-gray-100 mb-8 font-light leading-relaxed max-w-2xl">
+        Escape to our exclusive resort where luxury meets natural beauty. Indulge in world-class amenities, breathtaking views, and unforgettable experiences.
+      </p>
+      <div className="flex flex-col sm:flex-row gap-4">
+        <Link 
+          to="/rooms" 
+          className="relative overflow-hidden bg-teal-600 hover:bg-teal-700 text-white py-4 px-8 rounded-lg text-lg font-medium transition-all duration-500 text-center transform hover:scale-105 shadow-xl hover:shadow-teal-500/30 group"
+        >
+          <span className="relative z-10">Explore Rooms</span>
+          <span className="absolute inset-0 bg-gradient-to-r from-teal-500 to-teal-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+        </Link>
+        <Link 
+          to="/activities" 
+          className="relative overflow-hidden bg-transparent hover:bg-white/10 text-white border-2 border-white py-4 px-8 rounded-lg text-lg font-medium transition-all duration-500 text-center transform hover:scale-105 hover:shadow-lg group"
+        >
+          <span className="relative z-10">View Activities</span>
+          <span className="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></span>
+        </Link>
       </div>
     </div>
+  </div>
+</div>
     
     {/* Enhanced scrolling indicator */}
     <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce-slow">
@@ -69,7 +64,6 @@ const Hero = () => (
     </div>
   </div>
 );
-
 const Feature = ({ title, description, icon }) => (
   <div className="relative flex flex-col items-center text-center p-8 bg-white rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-3 group overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-br from-white to-gray-50 opacity-100 group-hover:opacity-0 transition-opacity duration-500"></div>
@@ -112,7 +106,7 @@ const Home = () => {
               title="Luxurious Accommodations" 
               description="Relax in our spacious and elegantly designed rooms and suites with stunning views."
               icon={
-                <svg className="w-16 h-16" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-16 h-16" xmlns="\src\assets\images\images-1.PNG" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               }
@@ -163,21 +157,21 @@ const Home = () => {
                 name: 'Deluxe Ocean View',
                 description: 'Spacious room with stunning ocean views and premium amenities.',
                 price: 'From $299 per night',
-                image: '/images/room-ocean-view.jpg',
+                image: '/src/assets/images/pic5.jpg',
                 highlight: 'BESTSELLER'
               },
               {
                 name: 'Garden Suite',
                 description: 'Immerse yourself in nature with our peaceful garden suite retreat.',
                 price: 'From $399 per night',
-                image: '/images/room-garden-suite.jpg',
+                image: 'src/assets/images/images-1.PNG',
                 highlight: 'NATURE RETREAT'
               },
               {
                 name: 'Presidential Villa',
                 description: 'The ultimate luxury experience with private pool and panoramic views.',
                 price: 'From $899 per night',
-                image: '/images/room-villa.jpg',
+                image: '/src/assets/images/ungasan_ocean-view-plunge-pool_villa-chintamani_rgb-1.jpg',
                 highlight: 'EXCLUSIVE'
               }
             ].map((room, index) => (
@@ -321,7 +315,7 @@ const Home = () => {
             <div className="md:flex">
               <div className="md:w-1/2 relative overflow-hidden h-96 md:h-auto">
                 <img 
-                  src="/images/resort-cta.jpg" 
+                  src="\src\assets\images\beautiful-nature-scenery-free-photo-2210x1473.jpg" 
                   alt="Resort view" 
                   className="w-full h-full object-cover transition-transform duration-700 hover:scale-105" 
                 />

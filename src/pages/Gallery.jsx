@@ -6,18 +6,18 @@ const Gallery = () => {
   const categories = ['all', 'rooms', 'dining', 'amenities', 'experiences'];
   
   const images = [
-    { src: '/api/placeholder/800/600', category: 'rooms', title: 'Deluxe Ocean View Room' },
-    { src: '/api/placeholder/800/600', category: 'rooms', title: 'Presidential Suite' },
-    { src: '/api/placeholder/800/600', category: 'dining', title: 'Oceanfront Restaurant' },
-    { src: '/api/placeholder/800/600', category: 'dining', title: 'Sunset Bar' },
-    { src: '/api/placeholder/800/600', category: 'amenities', title: 'Infinity Pool' },
-    { src: '/api/placeholder/800/600', category: 'amenities', title: 'Luxury Spa' },
-    { src: '/api/placeholder/800/600', category: 'experiences', title: 'Beach Yoga' },
-    { src: '/api/placeholder/800/600', category: 'experiences', title: 'Scuba Diving' },
-    { src: '/api/placeholder/800/600', category: 'rooms', title: 'Garden Suite' },
-    { src: '/api/placeholder/800/600', category: 'amenities', title: 'Fitness Center' },
-    { src: '/api/placeholder/800/600', category: 'dining', title: 'Fine Dining Experience' },
-    { src: '/api/placeholder/800/600', category: 'experiences', title: 'Sunset Cruise' }
+    { src: '/src/assets/images/image3.avif', category: 'rooms', title: 'Deluxe Ocean View Room' },
+    { src: '/src/assets/images/image4.avif', category: 'rooms', title: 'Presidential Suite' },
+    { src: '/src/assets/images/image5.avif', category: 'dining', title: 'Oceanfront Restaurant' },
+    { src: '/src/assets/images/image6.avif', category: 'dining', title: 'Sunset Bar' },
+    { src: '/src/assets/images/image7.avif', category: 'amenities', title: 'Infinity Pool' },
+    { src: '/src/assets/images/images-1.PNG', category: 'amenities', title: 'Luxury Spa' },
+    { src: '/src/assets/images/poyotomo-lake-is-fishing-spot-with-beautiful-mountain-views-nature_103127-902.avif', category: 'experiences', title: 'Beach Yoga' },
+    { src: '/src/assets/images/pool-holiday-leisure-hotel-blue_1203-3913.avif', category: 'experiences', title: 'Scuba Diving' },
+    { src: '/src/assets/images/pool_1308-5002.avif', category: 'rooms', title: 'Garden Suite' },
+    { src: '/src/assets/images/swimming-pool_74190-2104.avif', category: 'amenities', title: 'Fitness Center' },
+    { src: '/src/assets/images/WhatsApp Image 2025-04-22 at 2.46.21 PM (1).jpeg', category: 'dining', title: 'Fine Dining Experience' },
+    { src: '/src/assets/images/WhatsApp Image 2025-04-22 at 2.46.21 PM.jpeg', category: 'experiences', title: 'Sunset Cruise' }
   ];
   
   const filteredImages = activeCategory === 'all' 
@@ -83,29 +83,7 @@ const Gallery = () => {
         </div>
       </section>
       
-      {/* Virtual Tour */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Virtual Tour</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Experience Paradise Resort before you arrive with our immersive virtual tour.
-            </p>
-          </div>
-          
-          <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden shadow-lg">
-            <div className="bg-gray-200 w-full h-full flex items-center justify-center">
-              <p className="text-gray-500 text-lg">Virtual Tour Placeholder</p>
-            </div>
-          </div>
-          
-          <div className="mt-8 text-center">
-            <button className="bg-teal-600 hover:bg-teal-700 text-white py-3 px-8 rounded-md text-lg font-medium transition-colors duration-300">
-              Launch Virtual Tour
-            </button>
-          </div>
-        </div>
-      </section>
+     
     </div>
   );
 };

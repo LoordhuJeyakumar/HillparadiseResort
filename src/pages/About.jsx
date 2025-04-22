@@ -25,7 +25,7 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="md:flex md:items-center md:gap-12">
             <div className="md:w-1/2 mb-8 md:mb-0">
-              <img src="/api/placeholder/800/600" alt="Resort history" className="rounded-lg shadow-lg w-full" />
+              <img src="\src\assets\images\download.jpg" alt="Resort history" className="rounded-lg shadow-lg w-full" />
             </div>
             <div className="md:w-1/2">
               <h2 className="text-3xl font-serif font-bold text-gray-900 mb-6">Our Story</h2>
@@ -95,49 +95,7 @@ const About = () => {
         </div>
       </section>
       
-      {/* Team Section */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Meet Our Leadership Team</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              The dedicated professionals who ensure your experience exceeds expectations.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Isabella Martinez",
-                title: "General Manager",
-                bio: "With over 20 years of luxury hospitality experience, Isabella leads our team with passion and vision.",
-                image: "/api/placeholder/400/400"
-              },
-              {
-                name: "James Chen",
-                title: "Executive Chef",
-                bio: "A world-renowned culinary artist specializing in fusion cuisine that celebrates local ingredients.",
-                image: "/api/placeholder/400/400"
-              },
-              {
-                name: "Sarah Johnson",
-                title: "Spa Director",
-                bio: "Sarah brings her expertise in holistic wellness to create transformative experiences for our guests.",
-                image: "/api/placeholder/400/400"
-              }
-            ].map((member, index) => (
-              <div key={index} className="bg-white rounded-lg overflow-hidden shadow-md">
-                <img src={member.image} alt={member.name} className="w-full h-64 object-cover" />
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold mb-1">{member.name}</h3>
-                  <p className="text-teal-600 font-medium mb-4">{member.title}</p>
-                  <p className="text-gray-600">{member.bio}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
       
       {/* Awards Section */}
       <section className="py-16 bg-teal-50">
