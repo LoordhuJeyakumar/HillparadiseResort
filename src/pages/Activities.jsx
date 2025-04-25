@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
-const ActivityCard = ({ title, description, image, price }) => (
-  <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-    <img src={image} alt={title} className="w-full h-64 object-cover" />
-    <div className="p-6">
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600 mb-4">{description}</p>
-      {price && <p className="text-teal-600 font-medium mb-4">{price}</p>}
-      <button className="block w-full text-center bg-teal-600 hover:bg-teal-700 text-white py-2 px-4 rounded transition-colors duration-300">
+const ActivityCard = ({ title, description, image, price, isActive }) => (
+  <div className={`relative rounded-xl overflow-hidden transition-all duration-500 ${isActive ? 'scale-105 z-10' : 'scale-95 opacity-80'}`}>
+    <img 
+      src={image} 
+      alt={title} 
+      className="w-full h-64 md:h-80 object-cover brightness-75 hover:brightness-90 transition-all duration-300"
+    />
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex flex-col justify-end p-6">
+      <h3 className="text-xl font-bold text-white mb-2">{title}</h3>
+      <p className="text-gray-300 mb-3">{description}</p>
+      {price && <p className="text-teal-400 font-medium mb-4">{price}</p>}
+      <button className="self-start bg-teal-600 hover:bg-teal-700 text-white py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105">
         Learn More
       </button>
     </div>
@@ -15,6 +19,11 @@ const ActivityCard = ({ title, description, image, price }) => (
 );
 
 const Activities = () => {
+  const [activeCategory, setActiveCategory] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const carouselRef = useRef(null);
+  
   const categories = [
     {
       title: "Adventure Activities",
@@ -66,32 +75,61 @@ const Activities = () => {
       title: "Water Activities",
       activities: [
         {
-          title: "Sunset Sailing",
+          title: "Private Waterfall",
           description: "Cruise along the coast and enjoy breathtaking sunset views aboard our luxury catamaran.",
           price: "From $85 per person",
-          image: "https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+          image: "/src/assets/images/waterfall.jpg"
         },
         {
-          title: "Snorkeling Adventure",
+          title: "Fire camping",
           description: "Discover the underwater world with guided snorkeling tours to the best spots around the resort.",
           price: "From $60 per person",
-          image: "https://images.unsplash.com/photo-1560272564-c83b66b1ad12?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+          image: "/src/assets/images/firecamp.jpg"
         },
         {
-          title: "Private Waterfall Picnic",
+          title: "Dj Music",
           description: "Exclusive access to a hidden waterfall with gourmet picnic setup and champagne.",
           price: "From $220 per couple",
-          image: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
+          image: "/src/assets/images/dj.jpg"
         }
       ]
     }
   ];
-  
+
+  // Auto-rotate carousel
+  useEffect(() => {
+    if (!isAutoRotating) return;
+    
+    const interval = setInterval(() => {
+      setCurrentIndex(prev => 
+        prev === categories[activeCategory].activities.length - 1 ? 0 : prev + 1
+      );
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [activeCategory, isAutoRotating]);
+
+  const nextSlide = () => {
+    setCurrentIndex(prev => 
+      prev === categories[activeCategory].activities.length - 1 ? 0 : prev + 1
+    );
+    setIsAutoRotating(false);
+    setTimeout(() => setIsAutoRotating(true), 10000);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex(prev => 
+      prev === 0 ? categories[activeCategory].activities.length - 1 : prev - 1
+    );
+    setIsAutoRotating(false);
+    setTimeout(() => setIsAutoRotating(true), 10000);
+  };
+
   return (
-    <div>
+    <div className="bg-gray-900 text-white">
       {/* Hero Section */}
       <div className="relative pt-32 pb-16 md:pb-32">
-        <div className="absolute inset-0 bg-gradient-to-r from-teal-900/80 to-black/70 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-gray-900/90 via-teal-900/70 to-gray-900/90 z-10" />
         <img 
           src="https://images.unsplash.com/photo-1506929562872-bb421503ef21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&h=600&q=80"
           alt="Adventure background"
@@ -101,36 +139,140 @@ const Activities = () => {
           <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
             Adventure & Nature Experiences
           </h1>
-          <p className="text-xl text-gray-100 max-w-3xl">
+          <p className="text-xl text-teal-100 max-w-3xl">
             From thrilling safaris to serene waterfalls and magical campfire nights under the stars.
           </p>
         </div>
       </div>
       
-      {/* Activities Sections */}
-      {categories.map((category, index) => (
-        <section key={index} className={`py-16 ${index % 2 === 1 ? 'bg-gray-50' : 'bg-white'}`}>
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">{category.title}</h2>
-              <div className="w-24 h-1 bg-teal-600 mx-auto"></div>
+      {/* Category Selector */}
+      <div className="flex justify-center py-8 bg-gray-800">
+        <div className="inline-flex rounded-full bg-gray-700 p-1">
+          {categories.map((category, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setActiveCategory(index);
+                setCurrentIndex(0);
+              }}
+              className={`px-6 py-2 rounded-full capitalize transition-all duration-300 ${
+                activeCategory === index
+                  ? 'bg-teal-600 text-white shadow-lg'
+                  : 'text-gray-300 hover:text-white'
+              }`}
+            >
+              {category.title}
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      {/* 3D Carousel Section */}
+      <section className="py-16 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-serif font-bold text-white mb-4">
+              {categories[activeCategory].title}
+            </h2>
+            <div className="w-24 h-1 bg-teal-600 mx-auto"></div>
+          </div>
+          
+          <div className="relative h-[500px] perspective-1000">
+            {/* Navigation Arrows */}
+            <button 
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 text-white p-3 rounded-full hover:bg-teal-600 transition-all duration-300 shadow-lg"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+            
+            <button 
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-black/50 text-white p-3 rounded-full hover:bg-teal-600 transition-all duration-300 shadow-lg"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+            
+            {/* Carousel Items */}
+            <div 
+              ref={carouselRef}
+              className="relative w-full h-full flex items-center justify-center"
+            >
+              {categories[activeCategory].activities.map((activity, index) => {        
+                const isActive = index === currentIndex;
+                const isNext = index === (currentIndex + 1) % categories[activeCategory].activities.length;
+                const isPrev = index === (currentIndex - 1 + categories[activeCategory].activities.length) % categories[activeCategory].activities.length;
+                
+                let transform = '';
+                let zIndex = 0;
+                let opacity = 0.5;
+                
+                if (isActive) {
+                  transform = 'translateX(0) scale(1)';
+                  zIndex = 10;
+                  opacity = 1;
+                } else if (isNext) {
+                  transform = 'translateX(30%) scale(0.9)';
+                  zIndex = 5;
+                  opacity = 0.8;
+                } else if (isPrev) {
+                  transform = 'translateX(-30%) scale(0.9)';
+                  zIndex = 5;
+                  opacity = 0.8;
+                } else {
+                  transform = 'translateX(0) scale(0.7)';
+                  opacity = 0.3;
+                }
+                
+                return (
+                  <div
+                    key={index}
+                    className={`absolute w-3/4 md:w-2/3 transition-all duration-700 ease-in-out`}
+                    style={{
+                      transform: transform,
+                      zIndex: zIndex,
+                      opacity: opacity
+                    }}
+                  >
+                    <ActivityCard 
+                      {...activity} 
+                      isActive={isActive}
+                    />
+                  </div>
+                );
+              })}
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {category.activities.map((activity, idx) => (
-                <ActivityCard key={idx} {...activity} />
+            {/* Indicators */}
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-2">
+              {categories[activeCategory].activities.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => {
+                    setCurrentIndex(index);
+                    setIsAutoRotating(false);
+                    setTimeout(() => setIsAutoRotating(true), 10000);
+                  }}
+                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                    currentIndex === index ? 'bg-teal-500 w-6' : 'bg-gray-500'
+                  }`}
+                />
               ))}
             </div>
           </div>
-        </section>
-      ))}
+        </div>
+      </section>
       
-      {/* Special Experiences */}
-      <section className="py-16 bg-teal-800 text-white">
+      {/* Premium Experiences */}
+      <section className="py-16 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-serif font-bold mb-4">Premium Adventure Packages</h2>
-            <p className="text-xl text-teal-100 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-serif font-bold text-white mb-4">Premium Adventure Packages</h2>
+            <p className="text-xl text-teal-200 max-w-3xl mx-auto">
               Our most exclusive nature and adventure experiences
             </p>
           </div>
@@ -150,18 +292,26 @@ const Activities = () => {
                 image: "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&h=600&q=80"
               }
             ].map((experience, index) => (
-              <div key={index} className="bg-teal-700 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="md:flex">
-                  <div className="md:w-1/2">
-                    <img src={experience.image} alt={experience.title} className="h-64 w-full object-cover md:h-full" />
+              <div 
+                key={index} 
+                className="bg-gray-700 rounded-xl overflow-hidden shadow-2xl hover:shadow-teal-500/20 transition-all duration-500 hover:-translate-y-2"
+              >
+                <div className="md:flex h-full">
+                  <div className="md:w-1/2 relative">
+                    <img 
+                      src={experience.image} 
+                      alt={experience.title} 
+                      className="h-64 w-full object-cover md:h-full brightness-75 hover:brightness-90 transition duration-300"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-r from-teal-500/10 to-transparent"></div>
                   </div>
                   <div className="md:w-1/2 p-6 flex flex-col justify-between">
                     <div>
-                      <h3 className="text-xl font-semibold mb-2">{experience.title}</h3>
-                      <p className="text-teal-100 mb-4">{experience.description}</p>
-                      <p className="text-teal-200 font-medium mb-4">{experience.price}</p>
+                      <h3 className="text-xl font-bold text-white mb-2">{experience.title}</h3>
+                      <p className="text-gray-300 mb-4">{experience.description}</p>
+                      <p className="text-teal-400 font-medium mb-4">{experience.price}</p>
                     </div>
-                    <button className="bg-white text-teal-800 hover:bg-teal-100 py-2 px-4 rounded transition-colors duration-300">
+                    <button className="bg-teal-600 hover:bg-teal-700 text-white py-2 px-6 rounded-full transition-all duration-300 transform hover:scale-105 self-start">
                       Book This Experience
                     </button>
                   </div>
@@ -173,65 +323,50 @@ const Activities = () => {
       </section>
       
       {/* Activity Calendar */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-serif font-bold text-gray-900 mb-4">Weekly Adventure Schedule</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-3xl font-serif font-bold text-white mb-4">Weekly Adventure Schedule</h2>
+            <p className="text-xl text-teal-200 max-w-3xl mx-auto">
               Plan your adventure itinerary with our regular activities
             </p>
           </div>
           
-          <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+          <div className="bg-gray-800 rounded-xl shadow-2xl overflow-hidden">
             <div className="overflow-x-auto">
               <table className="min-w-full">
                 <thead>
                   <tr>
-                    <th className="py-3 px-4 bg-teal-600 text-white text-left">Time</th>
-                    <th className="py-3 px-4 bg-teal-600 text-white text-center">Monday</th>
-                    <th className="py-3 px-4 bg-teal-600 text-white text-center">Tuesday</th>
-                    <th className="py-3 px-4 bg-teal-600 text-white text-center">Wednesday</th>
-                    <th className="py-3 px-4 bg-teal-600 text-white text-center">Thursday</th>
-                    <th className="py-3 px-4 bg-teal-600 text-white text-center">Friday</th>
-                    <th className="py-3 px-4 bg-teal-600 text-white text-center">Saturday</th>
-                    <th className="py-3 px-4 bg-teal-600 text-white text-center">Sunday</th>
+                    <th className="py-4 px-6 bg-teal-700 text-white text-left font-bold">Time</th>
+                    {['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'].map((day) => (
+                      <th key={day} className="py-4 px-6 bg-teal-700 text-white text-center font-bold">
+                        {day}
+                      </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="py-3 px-4 border-b">7:00 AM</td>
-                    <td className="py-3 px-4 border-b text-center">Morning Safari</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Waterfall Hike</td>
-                    <td className="py-3 px-4 border-b text-center">Morning Safari</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Jungle Trek</td>
-                    <td className="py-3 px-4 border-b text-center">Morning Safari</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Waterfall Hike</td>
-                    <td className="py-3 px-4 border-b text-center">Nature Walk</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b">2:00 PM</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Camp Setup Demo</td>
-                    <td className="py-3 px-4 border-b text-center">Afternoon Safari</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Survival Skills</td>
-                    <td className="py-3 px-4 border-b text-center">Afternoon Safari</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Wildlife Spotting</td>
-                    <td className="py-3 px-4 border-b text-center">Afternoon Safari</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Photography Walk</td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 px-4 border-b">7:00 PM</td>
-                    <td className="py-3 px-4 border-b text-center">Beach Campfire</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Jungle Night Walk</td>
-                    <td className="py-3 px-4 border-b text-center">Stargazing</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Beach Campfire</td>
-                    <td className="py-3 px-4 border-b text-center">Night Safari</td>
-                    <td className="py-3 px-4 border-b text-center bg-teal-50">Beach Campfire</td>
-                    <td className="py-3 px-4 border-b text-center">Bonfire Stories</td>
-                  </tr>
+                  {[
+                    { time: '7:00 AM', activities: ['Morning Safari', 'Waterfall Hike', 'Morning Safari', 'Jungle Trek', 'Morning Safari', 'Waterfall Hike', 'Nature Walk'] },
+                    { time: '2:00 PM', activities: ['Camp Setup Demo', 'Afternoon Safari', 'Survival Skills', 'Afternoon Safari', 'Wildlife Spotting', 'Afternoon Safari', 'Photography Walk'] },
+                    { time: '7:00 PM', activities: ['Beach Campfire', 'Jungle Night Walk', 'Stargazing', 'Beach Campfire', 'Night Safari', 'Beach Campfire', 'Bonfire Stories'] }
+                  ].map((row, rowIndex) => (
+                    <tr key={row.time} className={rowIndex % 2 === 0 ? 'bg-gray-700' : 'bg-gray-800'}>
+                      <td className="py-3 px-6 text-teal-400 font-medium">{row.time}</td>
+                      {row.activities.map((activity, colIndex) => (
+                        <td 
+                          key={colIndex} 
+                          className={`py-3 px-6 text-center ${colIndex % 2 === 0 ? 'text-white' : 'text-teal-300'}`}
+                        >
+                          {activity}
+                        </td>
+                      ))}
+                    </tr>
+                  ))}
                 </tbody>
               </table>
             </div>
-            <div className="p-4 bg-gray-50 text-center text-sm text-gray-600">
+            <div className="p-4 bg-gray-900 text-center text-sm text-gray-400">
               * Adventure activities require advance booking. Minimum age requirements may apply for some activities.
             </div>
           </div>

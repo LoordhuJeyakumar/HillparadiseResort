@@ -404,25 +404,7 @@ const Rooms = () => {
                   </svg>
                 )
               },
-              {
-                title: "Luxury Bath Products",
-                description: "Organic and locally-sourced bath amenities for a spa-like experience.",
-                icon: (
-                  <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                  </svg>
-                )
-              },
-              {
-                title: "Smart Room Controls",
-                description: "Personalize your experience with state-of-the-art climate and lighting control.",
-                icon: (
-                  <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                )
-              },
+             
               {
                 title: "24/7 Room Service",
                 description: "Gourmet dining available in the comfort of your room, any time day or night.",
@@ -432,27 +414,9 @@ const Rooms = () => {
                   </svg>
                 )
               },
-              { 
-                title: "Mini Bar",
-                description: "Stocked with premium beverages and gourmet snacks for your enjoyment.",
-                icon: (
-                  <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
-                  </svg>
-                )
-              },
               {
                 title: "Daily Housekeeping",
                 description: "Impeccable service and attention to detail for a pristine environment.",
-                icon: (
-                  <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                  </svg>
-                )
-              },
-              {
-                title: "Private Balcony/Terrace",
-                description: "Enjoy outdoor living with stunning views from your private space.",
                 icon: (
                   <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
@@ -503,21 +467,21 @@ const Rooms = () => {
     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {[
         {
-          name: "Sarah Johnson",
-          location: "New York, USA",
-          quote: "The Presidential Villa exceeded all our expectations. The private pool and ocean views were breathtaking, and the staff went above and beyond to make our anniversary special.",
+          name: "MALATHY",
+          location: "Tirunelveli, Tamilnadu",
+          quote: "The Presidential Villa exceeded all our expectations. The private falls and sun sets were breathtaking, and the staff went above and beyond to make our anniversary special.",
           rating: 5
         },
         {
-          name: "David Chen",
-          location: "Singapore",
+          name: "SURAV",
+          location: "Kochin, Kerala",
           quote: "Our family had an amazing time in the Family Suite. The children's amenities were thoughtful, and the connecting rooms gave everyone their own space while keeping us together.",
           rating: 5
         },
         {
-          name: "Emma Roberts",
-          location: "London, UK",
-          quote: "My stay in the Deluxe Ocean View Room was the perfect escape. Waking up to those stunning views every morning was the highlight of my trip.",
+          name: "MANIRAM",
+          location: "Chennai, Tamilnadu",
+          quote: "My stay in the Deluxe sun set Room was the perfect escape. Waking up to those stunning views every morning was the highlight of my trip.",
           rating: 4
         }
       ].map((testimonial, index) => (

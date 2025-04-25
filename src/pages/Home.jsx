@@ -250,22 +250,22 @@ const Home = () => {
             {[
               {
                 quote: "The most amazing resort experience we've ever had. The staff went above and beyond to make our stay unforgettable.",
-                author: "Sarah & James T.",
-                location: "New York, USA",
+                author: "Stephen Raj",
+                location: "Chennai, Tamilnadu",
                 rating: 5,
                 avatar: "/avatars/avatar-1.jpg"
               },
               {
                 quote: "Paradise Resort exceeded all our expectations. The views are breathtaking, and the amenities are world-class.",
-                author: "Michael L.",
-                location: "London, UK",
+                author: "Mariyam john",
+                location: "Kakkanad, Kerala",
                 rating: 5,
                 avatar: "/avatars/avatar-2.jpg"
               },
               {
                 quote: "From the moment we arrived, we felt like royalty. The attention to detail and personalized service is unmatched.",
-                author: "Emma & David R.",
-                location: "Sydney, Australia",
+                author: "Shibuna",
+                location: "Tirunelveli, Tamilnadu",
                 rating: 5,
                 avatar: "/avatars/avatar-3.jpg"
               }
