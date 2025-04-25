@@ -12,7 +12,7 @@ const Hero = () => (
         playsInline
         className="w-full h-full object-cover transform scale-110 animate-zoom-in-out"
       >
-        <source src="\src\assets\images\WhatsApp Video 2025-03-11 at 11.43.54 AM.mp4" type="video/mp4" />
+        <source src="https://res.cloudinary.com/loordhujeyakumar-cloudinary/video/upload/f_auto:video,q_auto/v3cvjpzq31xduousvhnk" type="video/mp4" />
         <img 
           src="/images/resort-hero-fallback.jpg" 
           alt="Luxury resort backdrop" 
